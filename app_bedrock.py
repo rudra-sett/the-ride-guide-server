@@ -89,26 +89,26 @@ class ChatResponse(BaseModel):
 # get the correct model and params
 def get_model(model_name = "meta.llama2-13b-chat-v1"):
     if model_name == "meta.llama2-13b-chat-v1":
-        body = json.dumps({
+        body = {
                 "max_gen_len": 1000,
                 "temperature": 0.15,
                 "top_p": 0.92,
-            })
+            }
         return Bedrock(client = bedrock, model_id="meta.llama2-13b-chat-v1",model_kwargs=body)
     elif model_name == "meta.llama2-70b-chat-v1":
-        body = json.dumps({
+        body = {
                 "max_gen_len": 1000,
                 "temperature": 0.15,
                 "top_p": 0.92,
-            })
+            }
         return Bedrock(client = bedrock, model_id="meta.llama2-70b-chat-v1",model_kwargs=body)
     elif model_name == "mistral.mistral-7b-instruct-v0:2":
-        body = json.dumps({
+        body = {
                 "max_tokens": 1000,
                 "temperature": 0.15,
                 "top_p": 0.96,
                 "stop" : ["[INST]","[User]","[Assistant]","[\n]","[ ]","[\n ]","[ \n]","[Customer","Bot:","Human:"]
-            })
+            }
         return Bedrock(client = bedrock, model_id="mistral.mistral-7b-instruct-v0:2",model_kwargs=body)
 
 # define the retriever and prompt
