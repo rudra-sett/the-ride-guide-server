@@ -116,6 +116,10 @@ retriever = index.vectorstore.as_retriever()
 template: str = '''[INST]\n{context} [/INST]\n{history} \n[INST]\n{question} [/INST]'''
 prompt = PromptTemplate.from_template(template=template)
 
+@app.get("/api/test")
+async def test(request: Request):
+    return "Hello world!"
+
 # main route
 @app.post("/chat", response_class=StreamingResponse)
 async def chat(request: Request):
