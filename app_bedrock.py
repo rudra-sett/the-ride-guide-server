@@ -200,9 +200,12 @@ async def chat(request: Request):
         nonlocal prompt_to_send
         # a bit of a hack - prompt_to_send could either be a list of MessageAPI messages or a simple string
         # and hopefully the earlier code prevents any mismatches
-        async for chunk in llm.astream(prompt_to_send):
-            # print(chunk.__anext__())
-            yield chunk #.__anext__()
+        async for chunk in llm.astream(prompt_to_send):            
+            # oh my god this is type checking (but fancy)
+            if "claude" in model:
+                yield chunk.content
+            else:
+                yield chunk
 
 
     return StreamingResponse(stream_response(), media_type="application/json")
