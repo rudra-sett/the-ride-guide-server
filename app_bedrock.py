@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 from langchain_community.llms import Bedrock
-from langchain_community.llms import BedrockChat
+from langchain_community.chat_models import BedrockChat
 from langchain.prompts import PromptTemplate
 
 from langchain_core.messages import HumanMessage
