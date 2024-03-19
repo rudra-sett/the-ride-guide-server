@@ -200,7 +200,7 @@ async def chat(request: Request):
             history_str += f'{msg["chatbot"]}\n'
         # assemble the prompt
         prompt_to_send = prompt.format(context=system,question=message,history=history_str)
-        print(prompt_to_send)
+    print(prompt_to_send)
 
     # return a streamed response
     async def stream_response():
