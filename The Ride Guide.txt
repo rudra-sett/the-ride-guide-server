@@ -37,7 +37,7 @@ Fares are held in reserve upon booking a trip and automatically debited from you
 How do I book a trip? 
 Booking Methods: 
 • Online via our booking website: www.mbta.com/booktheride: accessible 24 hours a day
-• Call The RIDE Access Center (TRAC): 844-427-7433 (voice/relay) 857-2066569 (TTY) : TRAC staff are available 8:30am – 5:00pm
+• Call The RIDE Access Center (TRAC): 844-427-7433 (voice/relay) 857-206-6569 (TTY) : TRAC staff are available 8:30am – 5:00pm
 
 
 Trips may be booked from 1 to 5 days in advance. Note that no trips can be booked
@@ -45,16 +45,18 @@ after 5pm for travel the following day. Same day requests cannot be accommodated
 
 
 How to book or schedule a RIDE:
- • Request an Arrival Time for trips to a destination where you need to arrive before a specific time (for example, arriving at a doctor’s appointment by 9am) or Pick-Up Time for trips from a destination where you cannot leave earlier than a specific time (for example, leaving work after you are off at 5pm)
+There are two ways to book a RIDE, either via calling TRAC or via the web portal.
+TRAC option: Call TRAC and provide the following information:
+• Request an Arrival Time for trips to a destination where you need to arrive before a specific time (for example, arriving at a doctor’s appointment by 9am) or Pick-Up Time for trips from a destination where you cannot leave earlier than a specific time (for example, leaving work after you are off at 5pm)
 • Provide necessary pick-up and drop-off location information, indicate your mobility type, and if you will travel with a PCA, guest(s), child, or Service Animal
 • Receive a call the night prior to your trip by 9:00pm with your scheduled pick-up time.
 • Please keep in mind the following when booking your trip:
-1.  Requested arrival and pick-up times must be at least 45 minutes apart
+1. Requested arrival and pick-up times must be at least 45 minutes apart
 2. Please be prepared for your vehicle to arrive anytime between 5 minutes before to 15 minutes after your scheduled pick-up time.
 3. Ensure you can wait safely at your destination as you may be dropped off up to 30 minutes early and drivers cannot wait until a location opens
 4. Always book your trips with extra time should unforeseen delays arise
 
-
+Web Option:
 To create a web account: A helpful FAQ for registering and using the RIDE’s website can be found here: https://www.mbta.com/accessibility/the-ride/updates-ridecustomers. To use the booking website, you will need to specify your favorite addresses; to add your favorite addresses please review the updated FAQs and visit this Google form: https://forms.gle/RnP3ESnAynJf5fQS7. This form can be used to modify your favorite addresses as needed moving forward and must only include an address that is within the RIDE service area.
 To create an account, go to https://mbta.com/booktheride, click Create an Account,
 and follow the instructions on the website.
@@ -69,7 +71,7 @@ Please note the following restrictions:
 
 
 How do I change or cancel a trip?
- You may change trips up until 5pm of the day before service by calling TRAC at 844427-7433. After 5pm, trips for the following day are scheduled and cannot be changed. Please cancel trips as soon as your plans change using the booking website at www.mbta.com/booktheride, or by calling TRAC at 844-427-7433. Customers must adhere to the No-Show/Late Cancellation Policy found in this guide.
+ You may change trips up until 5pm of the day before service by calling TRAC at 844-427-7433. After 5pm, trips for the following day are scheduled and cannot be changed. Please cancel trips as soon as your plans change using the booking website at www.mbta.com/booktheride, or by calling TRAC at 844-427-7433. Customers must adhere to the No-Show/Late Cancellation Policy found in this guide.
 
 
 

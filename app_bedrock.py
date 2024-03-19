@@ -144,6 +144,11 @@ retriever = index.vectorstore.as_retriever()
 template: str = '''[INST]\n{context} [/INST]\n{history} \n[INST]\n{question} [/INST]'''
 prompt = PromptTemplate.from_template(template=template)
 
+# function to get last 3 prompts to help RAG stay in context
+def get_last_three_prompts(history):
+    num_exchanges = min(len(history),3)
+    return "\n".join(history[-num_exchanges:])
+
 @app.get("/api/test")
 async def test(request: Request):
     return "Hello world!"
@@ -160,7 +165,7 @@ async def chat(request: Request):
     model = request_data["model"]
 
     # get relevant documents
-    docs = retriever.get_relevant_documents(message)
+    docs = retriever.get_relevant_documents(message + get_last_three_prompts(history))
 
     # define the system prompt
     system = f'''
@@ -168,12 +173,14 @@ async def chat(request: Request):
     You are an AI chatbot for the RIDE, an MBTA paratransit service. You will help customer service representatives respond to user complaints and queries.
     Answer questions based on your knowledge and nothing more. If you are unable to decisively answer a question, direct them to customer service. Do not make up information outside of your given information.
     Customer service is needed if it is something you cannot answer. Requests for fare history require customer service, as do service complaints like a rude driver or late pickup.
-    Highly-specific situations will also require customer service to step in.
+    Highly-specific situations will also require customer service to step in. Remember that RIDE Flex and RIDE are not the same service. 
     Phone numbers:
     TRAC (handles scheduling/booking, trip changes/cancellations, anything time-sensitive): 844-427-7433 (voice/relay) 857-206-6569 (TTY)
     Mobility Center (handles eligibility questions, renewals, and changes to mobility status): 617-337-2727 (voice/relay)
     MBTA Customer support (handles all other queries): 617-222-3200 (voice/relay)
     '''
+
+    # do a second LLM to make a prompt to complete an incomplete prompt
 
     # get the correct model
     llm = get_model(model)
