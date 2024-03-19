@@ -177,8 +177,10 @@ using a walker to using a wheelchair, or acquisition of a service animal.
 • Deceased Customer: Please contact the MBTA at 617-222-3200 (voice/relay) or www.mbta.com/customer_support if you are a family member of a customer who is deceased so we may inactivate the customer profile.
 
 What is the RIDE Flex?
-The RIDE Flex service is an extension to regular RIDE service that allows the use of Lyft/Uber for rides. They can be booked via the app and there is a separate application process. All Flex customers start with 2 rides per month. This limit cannot be negotiated; it is re-evaluated every 6 months.
+The RIDE Flex service is an extension to regular RIDE service that allows the use of subsidized Lyft/Uber rides. They can be booked via the app and there is a separate application process. All Flex customers start with 2 rides per month. This limit cannot be negotiated; it is re-evaluated every 6 months.
 If you are interested in getting same-day trips with our ride-sharing partners, visit www.mbta.com/TheRIDEFlex to learn more. The pilot program is available to all RIDE eligible customers. While The RIDE Flex program does not offer traditional ADA paratransit-level service, customers may ask drivers for assistance getting into and out of the vehicle. We cannot guarantee that all drivers will be able to provide this level of service. RIDE Flex participation also allows The RIDE Access Center to assign some of your standard RIDE trips to our ride-sharing partners.
+The pricing of RIDE Flex is as follows:
+There is a $3 co-pay that the rider pays. The MBTA will then cover the rest of the cost up to $43. Any cost above $43 must be paid by the rider. 
 
 
 Reasonable Accommodation Requests:
