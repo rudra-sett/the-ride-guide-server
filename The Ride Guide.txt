@@ -13,15 +13,14 @@ Stoughton, and Wellesley are also served. See the end of this guide for a full m
 
 How much does it cost?:
 One-way ADA fare is $3.35 for each registered customer or guest. One-way premium non-ADA fare is $5.60 for each registered customer or guest. Premium non-ADA fares apply if the trip origin and/or destination is greater than 3/4 miles from MBTA bus or subway service or for same-day changes, except for trip time negotiation. Reservationists will confirm the fare when you schedule a trip.
-A Personal Care Assistant (PCA) or child under the age of 11 accompanying a customer (up to 2 children per customer) is not charged a fare. Customers may bring one guest, with additional guests allowed if space is available. PCAs and guests must
-travel to and from the same destination at the same time as the customer.
+A Personal Care Assistant (PCA) or child under the age of 11 accompanying a customer (up to 2 children per customer) is not charged a fare. Customers may bring one guest, with additional guests allowed if space is available. PCAs and guests must travel to and from the same destination at the same time as the customer. Guests who are not PCAs or children do not ride for free.
 
 
 How to add funds to RIDE account?
 Options to Add Funds:
 1. Go to https://commerce.mbta.com/TheRide/ : Allow 2 business days to post : Sign into your account and add funds 24 hours a day. Your confirmation # is your receipt.
 2. Call 888-844-0355, select option 2 : Posts instantly : Call Mon-Fri 7am-8pm and Sat/Sun 9am-5pm incl. holidays to make a deposit or check your balance. Your confirmation # is your receipt.
-3. Visit the CharlieCard Store at the Downtown Crossing station, Accessible entrance is at 32 Summer Street via the 101 Arch Street building : Posts instantly :  Monday-Closed Tuesday, Thursday 8:30am-1pm Wednesday, Friday 12:30pm-5pm, Receipt is provided.
+3. Visit the CharlieCard Store at the Downtown Crossing station, Accessible entrance is at 32 Summer Street via the 101 Arch Street building : Posts instantly :  It is closed on Monday, but open Tuesday, Thursday 8:30am-1pm Wednesday, Friday 12:30pm-5pm, Receipt is provided.
 4. Mail a check or money order : Allow 5 business days to post : MBTA-RIDE Fares, PO Box 845097, Boston, MA 02284-5097. Your canceled check or money order is your receipt.
 
 
@@ -177,8 +176,9 @@ Updating Your Profile:
 using a walker to using a wheelchair, or acquisition of a service animal.
 • Deceased Customer: Please contact the MBTA at 617-222-3200 (voice/relay) or www.mbta.com/customer_support if you are a family member of a customer who is deceased so we may inactivate the customer profile.
 
-
-Pilot Programs:  If you are interested in getting same-day trips with our ride-sharing partners, visit www.mbta.com/TheRIDEFlex to learn more. The pilot program is available to all RIDE eligible customers. While The RIDE Flex program does not offer traditional ADA paratransit-level service, customers may ask drivers for assistance getting into and out of the vehicle. We cannot guarantee that all drivers will be able to provide this level of service. RIDE Flex participation also allows The RIDE Access Center to assign some of your standard RIDE trips to our ride-sharing partners.
+What is the RIDE Flex?
+The RIDE Flex service is an extension to regular RIDE service that allows the use of Lyft/Uber for rides. They can be booked via the app and there is a separate application process. All Flex customers start with 2 rides per month. This limit cannot be negotiated; it is re-evaluated every 6 months.
+If you are interested in getting same-day trips with our ride-sharing partners, visit www.mbta.com/TheRIDEFlex to learn more. The pilot program is available to all RIDE eligible customers. While The RIDE Flex program does not offer traditional ADA paratransit-level service, customers may ask drivers for assistance getting into and out of the vehicle. We cannot guarantee that all drivers will be able to provide this level of service. RIDE Flex participation also allows The RIDE Access Center to assign some of your standard RIDE trips to our ride-sharing partners.
 
 
 Reasonable Accommodation Requests:
