@@ -147,7 +147,7 @@ prompt = PromptTemplate.from_template(template=template)
 # function to get last 3 prompts to help RAG stay in context
 def get_last_three_prompts(history):
     num_exchanges = min(len(history),3)
-    return "\n".join(*map(lambda x: x["user"],history[-num_exchanges:]))
+    return "\n".join(list(map(lambda x: x["user"],history[-num_exchanges:])))
 
 @app.get("/api/test")
 async def test(request: Request):
