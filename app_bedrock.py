@@ -181,7 +181,7 @@ async def chat(request: Request):
 
     if "claude" in model:
         # if it's a Claude model, use the Message API - there's no reason to use the completion API in this case
-        messages = claude_message_api_formatter(history)
+        messages = claude_message_api_formatter(system,history)
         # messages.append({"role" : "user","content" : message})
         messages.append(HumanMessage(content=message))
         prompt_to_send = messages
