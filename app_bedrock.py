@@ -215,7 +215,7 @@ async def chat(request: Request):
     # get relevant documents
     search_prompt = rag_prompt_gen(history,message)
     # docs = retriever.get_relevant_documents(search_prompt)# + get_last_three_prompts(history))
-    index_id = 'dd8dea5b-a884-46b3-a9ab-b8d51253d339'
+    index_id = 'fdfa8142-736d-44e9-baab-7491f3faeea3'
     docs = kendra.retrieve(IndexId = index_id,QueryText=search_prompt)['ResultItems']
     print(search_prompt)
 
