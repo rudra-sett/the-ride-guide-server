@@ -212,29 +212,44 @@ async def chat(request: Request):
     message = request_data["message"]
     history = request_data["history"]
     model = request_data["model"]
+    rag = request_data["rag"]
 
     # get relevant documents
     search_prompt = rag_prompt_gen(history,message)
     # docs = retriever.get_relevant_documents(search_prompt)# + get_last_three_prompts(history))
     # be118630-f4fc-4c19-8370-531c37032725
     # fdfa8142-736d-44e9-baab-7491f3faeea3
-    index_id = 'be118630-f4fc-4c19-8370-531c37032725'
-    docs = kendra.retrieve(IndexId = index_id,QueryText=search_prompt)['ResultItems']
+    # index_id = 'be118630-f4fc-4c19-8370-531c37032725'
+    docs = kendra.retrieve(IndexId = rag,QueryText=search_prompt)['ResultItems']
     print(search_prompt)
 
     #  define the system prompt
-    # You are an AI chatbot for the RIDE, an MBTA paratransit service. You will help customer service representatives respond to user complaints and queries.
-    # Answer questions based on your knowledge and nothing more. If you are unable to decisively answer a question, direct them to customer service. Do not make up information outside of your given information.
-    # Customer service is needed if it is something you cannot answer. Requests for fare history require customer service, as do service complaints like a rude driver or late pickup.
-    # Highly-specific situations will also require customer service to step in. Remember that RIDE Flex and RIDE are not the same service. 
-    # Phone numbers:
-    # TRAC (handles scheduling/booking, trip changes/cancellations, anything time-sensitive): 844-427-7433 (voice/relay) 857-206-6569 (TTY)
-    # Mobility Center (handles eligibility questions, renewals, and changes to mobility status): 617-337-2727 (voice/relay)
-    # MBTA Customer support (handles all other queries): 617-222-3200 (voice/relay)
-    system = f'''
-    Context: {str(docs[0]['Content']) + ' ' + str(docs[1]['Content']) + ' ' + str(docs[2]['Content'])}
-    Please answer questions on this context.
-    '''
+    if rag=='fdfa8142-736d-44e9-baab-7491f3faeea3':
+        system = f'''
+        Context: {'\n'.join(list(map(lambda x: x['Content'],docs[:3])))}
+        You are an AI chatbot for the RIDE, an MBTA paratransit service. You will help customer service representatives respond to user complaints and queries.
+        Answer questions based on your knowledge and nothing more. If you are unable to decisively answer a question, direct them to customer service. Do not make up information outside of your given information.
+        Customer service is needed if it is something you cannot answer. Requests for fare history require customer service, as do service complaints like a rude driver or late pickup.
+        Highly-specific situations will also require customer service to step in. Remember that RIDE Flex and RIDE are not the same service. 
+        Phone numbers:
+        TRAC (handles scheduling/booking, trip changes/cancellations, anything time-sensitive): 844-427-7433 (voice/relay) 857-206-6569 (TTY)
+        Mobility Center (handles eligibility questions, renewals, and changes to mobility status): 617-337-2727 (voice/relay)
+        MBTA Customer support (handles all other queries): 617-222-3200 (voice/relay)
+        '''
+    elif rag=='be118630-f4fc-4c19-8370-531c37032725':
+        system = f'''
+        Context: {'\n'.join(list(map(lambda x: x['Content'],docs[:5])))}
+        You are an AI chatbot for MassDOT. You will use your knowledge to answer questions
+        about MassDOT guidelines and procedures. 
+        '''
+    elif rag=='dd8dea5b-a884-46b3-a9ab-b8d51253d339':
+        system = f'''
+        Context: {'\n'.join(list(map(lambda x: x['Content'],docs)))}
+        You are an AI grant navigator for the Department of Energy and Environmental Affairs. You will use
+        information about various grants to provide a structured response (with bullet points) to
+        describe different grants that the user is searching for. Make sure to include a point of contact 
+        for each grant. 
+        '''
     print(system)
 
     # get the correct model
