@@ -226,7 +226,7 @@ async def chat(request: Request):
     #  define the system prompt
     if rag=='fdfa8142-736d-44e9-baab-7491f3faeea3':
         system = f'''
-        Context: {'\n'.join(list(map(lambda x: x['Content'],docs[:3])))}
+        Context: {' '.join(list(map(lambda x: x['Content'],docs[:3])))}
         You are an AI chatbot for the RIDE, an MBTA paratransit service. You will help customer service representatives respond to user complaints and queries.
         Answer questions based on your knowledge and nothing more. If you are unable to decisively answer a question, direct them to customer service. Do not make up information outside of your given information.
         Customer service is needed if it is something you cannot answer. Requests for fare history require customer service, as do service complaints like a rude driver or late pickup.
@@ -238,13 +238,13 @@ async def chat(request: Request):
         '''
     elif rag=='be118630-f4fc-4c19-8370-531c37032725':
         system = f'''
-        Context: {'\n'.join(list(map(lambda x: x['Content'],docs[:5])))}
+        Context: {'  '.join(list(map(lambda x: x['Content'],docs[:5])))}
         You are an AI chatbot for MassDOT. You will use your knowledge to answer questions
         about MassDOT guidelines and procedures. 
         '''
     elif rag=='dd8dea5b-a884-46b3-a9ab-b8d51253d339':
         system = f'''
-        Context: {'\n'.join(list(map(lambda x: x['Content'],docs)))}
+        Context: {'  '.join(list(map(lambda x: x['Content'],docs)))}
         You are an AI grant navigator for the Department of Energy and Environmental Affairs. You will use
         information about various grants to provide a structured response (with bullet points) to
         describe different grants that the user is searching for. Make sure to include a point of contact 
