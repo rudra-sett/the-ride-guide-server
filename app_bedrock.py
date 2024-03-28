@@ -152,7 +152,7 @@ def rag_prompt_gen(history,prompt):
         model_prompt = f'''[INST]\n{chat_history} [/INST]\n{qa_prompt} \n[INST]\n{prompt} [/INST] 
         The re-phrased query is: '''
         prompt_generator = get_model()
-        model_prompt_template = PromptTemplate.from_template(completion_api_template=model_prompt)
+        model_prompt_template = PromptTemplate.from_template(template=model_prompt)
         new_prompt = model_prompt_template.format(qa_prompt=qa_prompt,chat_history=chat_history,prompt=prompt)
         # clip the prompt at 999 characters because Kendra has a search limit
         rag_prompt = prompt_generator.invoke(new_prompt[:999])
