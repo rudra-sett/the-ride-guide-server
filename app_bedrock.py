@@ -155,8 +155,8 @@ def rag_prompt_gen(history,prompt):
         model_prompt_template = PromptTemplate.from_template(template=model_prompt)
         new_prompt = model_prompt_template.format(qa_prompt=qa_prompt,chat_history=chat_history,prompt=prompt)
         # clip the prompt at 999 characters because Kendra has a search limit
-        rag_prompt = prompt_generator.invoke(new_prompt[:999])
-        return rag_prompt
+        rag_prompt = prompt_generator.invoke(new_prompt)
+        return rag_prompt[:999]
     else:
         return prompt
 
@@ -217,7 +217,7 @@ async def chat(request: Request):
         '''
     elif rag=='dd8dea5b-a884-46b3-a9ab-b8d51253d339':
         system = f'''
-        Context: {'  '.join(list(map(lambda x: x['Content'],docs)))}
+        Context: {'  '.join(list(map(lambda x: x['Content'],docs[:5])))}
         You are an AI grant navigator for the Department of Energy and Environmental Affairs. You will use
         information about various grants to provide a structured response (with bullet points) to
         describe different grants that the user is searching for. Make sure to include a point of contact 
