@@ -1,5 +1,3 @@
-from pydantic import BaseModel
-
 from langchain_community.llms import Bedrock
 from langchain_community.chat_models import BedrockChat
 from langchain.prompts import PromptTemplate
@@ -35,49 +33,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-from langchain.indexes import VectorstoreIndexCreator
-from langchain_community.vectorstores import FAISS
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.document_loaders import TextLoader
-from langchain_community.embeddings import HuggingFaceEmbeddings
-
-# Define the path to the pre-trained model you want to use
-modelPath = "sentence-transformers/all-MiniLM-l6-v2"
-
-# Create a dictionary with model configuration options, specifying to use the CPU for computations
-model_kwargs = {'device':'cpu'}
-
-# Create a dictionary with encoding options, specifically setting 'normalize_embeddings' to False
-encode_kwargs = {'normalize_embeddings': False}
-
-# Initialize an instance of HuggingFaceEmbeddings with the specified parameters
-embeddings = HuggingFaceEmbeddings(
-    model_name=modelPath,     # Provide the pre-trained model's path
-    model_kwargs=model_kwargs, # Pass the model configuration options
-    encode_kwargs=encode_kwargs # Pass the encoding options
-)
-
-#creates and returns an in-memory vector store to be used in the application
-def get_index(): 
-    #load the text
-    loader = TextLoader("./The Ride Guide.txt")
-    #create a text splitter
-    text_splitter = RecursiveCharacterTextSplitter( 
-        separators=["\n\n", "\n", ".", " "], #split chunks at (1) paragraph, (2) line, (3) sentence, or (4) word, in that order
-        chunk_size=2500, #divide into 1000-character chunks using the separators above
-        chunk_overlap=100 #number of characters that can overlap with previous chunk
-    )
-    # create the index
-    index_creator = VectorstoreIndexCreator( #create a vector store factory
-        vectorstore_cls=FAISS, #use an in-memory vector store for demo purposes
-        embedding=embeddings, #use Titan embeddings
-        text_splitter=text_splitter, #use the recursive text splitter
-    )
-    index_from_loader = index_creator.from_loaders([loader]) #create an vector store index from the loaded PDF
-    return index_from_loader #return the index to be cached by the client app
-
-index = get_index()
 
 # get the correct model and params
 def get_model(model_name = "meta.llama2-13b-chat-v1"):
@@ -141,11 +96,9 @@ def get_last_three_prompts(history):
 def summarize_and_tag(history):
     summary_prompt = '''Given this chat history, please summarize it for future customer
     representatives to look at later.'''
-    summarizer = get_model()
-
+    summarizer = get_model('anthropic.claude-3-sonnet-20240229-v1:0')
     tag_prompt = '''Given this chat history, please give it one of the following tags:
     RIDE Flex, Fare History Request, '''
-
     pass
 
 # gets flex records
@@ -156,13 +109,36 @@ def get_flex_record(client_id):
     pass
 
 # draft emails
-def draft_email_response(history):
+@app.post("/generate_email", response_class=StreamingResponse)
+def draft_email_response(request: Request):
+    # get request variables and print them out
+    request_data = request.json()
+    # print(request_data)
+    # message = request_data["message"]
+    history = request_data["history"]
+
     email_prompt = '''Given this chat history, please draft an email that summarizes the 
-    policies that were discussed.'''
-    chat_history = claude_message_api_formatter(history)
+    policies that were discussed. Use the following format:
+    Dear [Customer Name],
+    
+    I received your inquiry on <<TOPIC SUMMARY>>.
+    
+    <<Fill in the email with a policy quote if possible and answer the question briefly. Reference FTA
+    guidelines where possible>>
+    <<Make sure to close out the letter in a polite way>>
+
+    Best,
+    [NAME]'''
+    full_prompt = claude_message_api_formatter(email_prompt,history)
     email_generator = get_model('anthropic.claude-3-sonnet-20240229-v1:0')
 
-    pass
+    async def stream_response():
+        # a bit of a hack - prompt_to_send could either be a list of MessageAPI messages or a simple string
+        # and hopefully the earlier code prevents any mismatches
+        async for chunk in email_generator.astream(full_prompt):                                
+            yield chunk.content           
+    return StreamingResponse(stream_response(), media_type="application/json")
+   
 
 # generate better prompt
 def rag_prompt_gen(history,prompt):
@@ -176,26 +152,17 @@ def rag_prompt_gen(history,prompt):
         model_prompt = f'''[INST]\n{chat_history} [/INST]\n{qa_prompt} \n[INST]\n{prompt} [/INST] 
         The re-phrased query is: '''
         prompt_generator = get_model()
-        model_prompt_template = PromptTemplate.from_template(template=model_prompt)
+        model_prompt_template = PromptTemplate.from_template(completion_api_template=model_prompt)
         new_prompt = model_prompt_template.format(qa_prompt=qa_prompt,chat_history=chat_history,prompt=prompt)
-        rag_prompt = prompt_generator.invoke(new_prompt)
+        # clip the prompt at 999 characters because Kendra has a search limit
+        rag_prompt = prompt_generator.invoke(new_prompt[:999])
         return rag_prompt
     else:
         return prompt
 
-from typing import Any, AsyncIterator, Iterator, List, Mapping, Optional
-
-class ChatRequest(BaseModel):
-    message: str
-    history: List[dict] = []
-
-class ChatResponse(BaseModel):
-    response: str
-
 # define the retriever and prompt
-retriever = index.vectorstore.as_retriever()
-template: str = '''[INST]\n{context} [/INST]\n{history} \n[INST]\n{question} [/INST]'''
-prompt = PromptTemplate.from_template(template=template)
+completion_api_template: str = '''[INST]\n{context} [/INST]\n{history} \n[INST]\n{question} [/INST]'''
+prompt = PromptTemplate.from_template(completion_api_template=completion_api_template)
 
 @app.get("/api/test")
 async def test(request: Request):
@@ -241,6 +208,12 @@ async def chat(request: Request):
         Context: {'  '.join(list(map(lambda x: x['Content'],docs[:5])))}
         You are an AI chatbot for MassDOT. You will use your knowledge to answer questions
         about MassDOT guidelines and procedures. 
+        '''
+    elif rag=='740b4f0d-09f4-458c-82f3-33d6e1558b80':
+        system = f'''
+        Context: {'  '.join(list(map(lambda x: x['Content'],docs[:5])))}
+        You are an AI chatbot for MassHealth. You will use your knowledge to answer questions
+        about MassHealth. 
         '''
     elif rag=='dd8dea5b-a884-46b3-a9ab-b8d51253d339':
         system = f'''
