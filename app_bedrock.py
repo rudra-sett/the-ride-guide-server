@@ -162,7 +162,7 @@ def rag_prompt_gen(history,prompt):
 
 # define the retriever and prompt
 completion_api_template: str = '''[INST]\n{context} [/INST]\n{history} \n[INST]\n{question} [/INST]'''
-prompt = PromptTemplate.from_template(completion_api_template=completion_api_template)
+prompt = PromptTemplate.from_template(template=completion_api_template)
 
 @app.get("/api/test")
 async def test(request: Request):
